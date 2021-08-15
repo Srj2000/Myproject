@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>{% block title %} {% endblock%}</title>
+    <style>
+        .navbar{
+            display:flex;
+            justify-content: space-around;
+        }
+        a{text-decoration: none;
+        }
+        #logout{
+            border: 2px solid red;
+            background-color: red;
+            border-radius: 30px;
+            font-size: 1.4rem;
+
+        }
+       label,button{
+           display: block;
+           margin-top: 3px;
+       }
+       .forms,.form,.user{
+           display: flex;
+           justify-content: space-around;
+       }
+       th{background-color: black;
+        color: white;
+        }
+        td, table{text-align: center;
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+        table{
+            width: 99vw;
+        }
+        .action{
+            display: flex;
+            justify-content: center;
+        }
+        .logout{
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+       <a href="/"><h1>Register|Sign In</h1></a>
+       <a href="/post"><h1>Post</h1></a>
+       <a href="/product"><h1>Product</h1></a>
+    </div>
+    <hr>
+    {% block body%}{% endblock%}
+</body>
+{% block script %}{% endblock %}
+</html>

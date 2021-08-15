@@ -1,0 +1,66 @@
+{% extends 'user/basic.html'%}
+
+{% block  title%}Post{% endblock%}
+  {% block body%} 
+  <div class="post">
+    {% if user.is_authenticated %}
+    <div class="user"><h1>Welcome {{request.user}} <a href="/logout" id="logout">Logout</a></h1></div>
+  <div class="form">
+     
+    <form action="/post" method="POST">
+        {% csrf_token %}
+        <label for="text">Post Here</label>
+        <input type="text" name="post">
+
+       
+
+        <button >Submit</button>
+    </form></div>
+    {% else %}
+    <h1>You need to login to Post</h1> {% endif %}
+<div class="mypost">
+    <h1>My Posts</h1>
+    <table>
+        <thead><tr>
+            <th>S.No</th>
+            <th>Posts</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+            <th>Actions</th>
+            </tr>
+        </thead>
+        {% for i in msg %}
+
+    <tbody><tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.text}}</td>
+        <td>{{i.created_at}}</td>
+        <td>{{i.updated_at}}</td>
+       
+
+        <td><div class="action"><button id="update"  onclick="updation('{{i.text}}','{{i.id}}')">UPDATE</button>
+            <a href="/delete/{{i.id}}"><button >DELETE</button></a></div></td>
+        </tr>
+    </tbody>{% endfor%}</table>
+</div>
+</div>
+
+{% endblock%}
+{% block script %}
+<script>
+form=document.querySelector('.form')
+    function updation(text,id){
+        console.log(text)
+        form.innerHTML=`
+
+    <form action="/update/${id}" method="POST">
+        {% csrf_token %}
+        <label for="text">Update Here</label>
+        <input type="text" name="update" value='${text}'>
+
+
+    <button type='submit'>Update</button>
+    `
+    }
+
+</script>{% endblock %}
